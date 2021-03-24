@@ -209,7 +209,7 @@ ControlChromecastPlatform.prototype.configurationRequestHandler = function (cont
         services = [Service.LightSensor];
       }
 
-      characteristics = [Characteristic.Active, Characteristic.SleepDiscoveryMode, Characteristic.RemotKey];
+      characteristics = [Characteristic.Active, Characteristic.SleepDiscoveryMode, Characteristic.RemoteKey];
       
       for (var index in characteristics) {
         var characteristic = characteristics[index];
