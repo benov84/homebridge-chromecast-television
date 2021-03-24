@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "castv2-client": "^1.2.0",
+    "hap-nodejs": "^0.4.28",
     "mdns": "^2.3.3"
   },
   "devDependencies": {
