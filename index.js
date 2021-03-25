@@ -61,7 +61,7 @@ ControlChromecastPlatform.prototype.scanAccesories = function () {
 
   let addChromecast = function(device){
     this.log.info('Found device. Adding if supported: ' + device.txtRecord.md)
-    if(device && device.txtRecord && ['Chromecast'].indexOf(device.txtRecord.md) !== -1){
+    if(device && device.txtRecord && ['Chromecast','Chromecast Ultra'].indexOf(device.txtRecord.md) !== -1){
       let uuid = UUIDGen.generate(device.txtRecord.id);
       let accessory = this.accessories[uuid];
 
