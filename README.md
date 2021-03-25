@@ -1,9 +1,9 @@
 
-# Controller - Chromecast
+# Chromecast Television Accessory
 
-This accessory will discover all chromecasts on the network and create a Television Accessory in HomeKit. Supported are Chromecast/Chromecast Ultra.
+This plugin will discover all chromecasts on the network and create a Television Accessory. Supported are Chromecast/Chromecast Ultra.
 
-You can control the volume from Apple TV Remote in Control Center.
+Switching On/Off will Play/Pause the stream. You can control the volume from Apple TV Remote in Control Center.
 
 ## Installation
 
