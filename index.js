@@ -40,6 +40,10 @@ function ControlChromecastPlatform(log, config, api) {
     if (this.config && this.config.ignoredDevices && this.config.ignoredDevices.constructor !== Array)
         delete this.config.ignoredDevices;
 
+    this.category = 'TELEVISION';
+    if (this.config && this.config.category)
+      this.category = this.config.category;
+
     this.CastScanner = mdns.createBrowser(mdns.tcp('googlecast'), { resolverSequence: mdnsSequence });
 
     if(this.config)
@@ -122,13 +126,21 @@ ControlChromecastPlatform.prototype.addAccessory = function (device) {
     this.log('Found Chromecast: "%s" "%s" at %s:%d', device.name, device.txtRecord.fn, device.addresses[0], device.port);
 
     let accessory = new PlatformAccessory(device.name, UUIDGen.generate(device.txtRecord.id));
-    accessory.category = this.api.hap.Categories.TELEVISION;
+    //accessory.category = this.api.hap.Categories.TELEVISION;
+
+    if(this.category == "TV_STREAMING_STICK")
+      accessory.category = this.api.hap.Categories.TV_STREAMING_STICK;
+		else if(this.category == "TV_SET_TOP_BOX")
+      accessory.category = this.api.hap.Categories.TV_SET_TOP_BOX;
+		else if(this.category == "APPLE_TV")
+      accessory.category = this.api.hap.Categories.APPLE_TV;
+		else
+      accessory.category = this.api.hap.Categories.TELEVISION;
 
     accessory.context.id = device.txtRecord.id;
-    accessory.context.name = device.txtRecord.fn;
+    accessory.context.name = device.txtRecord.md + " " + device.txtRecord.fn;
     accessory.context.make = "Google";
     accessory.context.model = device.txtRecord.md || "Unknown";
-    accessory.context.features = { color: false, infrared: false, multizone: false };
 
     accessory.getService(Service.AccessoryInformation)
         .setCharacteristic(Characteristic.Manufacturer, accessory.context.make)
