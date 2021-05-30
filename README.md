@@ -23,7 +23,7 @@ Add this to your config.json.
 ]
 ```
 
-You can change category to specify HomeKit device type - TELEVISION, TV_STREAMING_STICK, TV_SET_TOP_BOX, APPLE_TV.
+You can specify category for HomeKit accessory - TELEVISION, TV_STREAMING_STICK, TV_SET_TOP_BOX, APPLE_TV.
 
 ## Credits
 This project is based on [@homebridge-control-chromecast](https://github.com/yotamtal/homebridge-control-chromecast#readme)
