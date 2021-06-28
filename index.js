@@ -4,7 +4,7 @@ const CastDefaultMediaReceiver = require('castv2-client').DefaultMediaReceiver;
 const pkginfo = require('./package');
 const CustomCharacteristics = require('./custom-characteristics');
 
-let Service, Characteristic, PlatformAccessory, UUIDGen;
+let Service, Characteristic, PlatformAccessory, hap, UUIDGen;
 
 const mdnsSequence = [
   mdns.rst.DNSServiceResolve(),
