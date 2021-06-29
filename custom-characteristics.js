@@ -1,4 +1,4 @@
-const { Characteristic } = require('hap-nodejs');
+const { Characteristic } = require('./index');
 
 const DeviceTypeUUID = '2af07946-01da-11e8-ba89-0ed5f89f718b';
 const DeviceType = function () {
