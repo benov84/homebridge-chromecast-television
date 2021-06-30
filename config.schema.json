@@ -10,6 +10,7 @@
 			"name": {
 				"title": "Name",
 				"type": "string",
+				"default": "ChromecastTelevision",
 				"required": true
 			},
 			"category": {
