@@ -1,0 +1,41 @@
+{
+	"pluginAlias": "ChromecastTelevision",
+	"pluginType": "platform",
+	"singular": true,
+	"headerDisplay": "Add your Chromecast or Chromecast Ultra to Homebridge.",
+	"footerDisplay": "If you need more info, check out the <a href='https://github.com/benov84/homebridge-chromecast-television/blob/main/README.md'>ReadMe</a>",
+	"schema": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"title": "Name",
+				"type": "string",
+				"default": "ChromecastTelevision",
+				"required": true
+			},
+			"category": {
+				"title": "Device Category",
+				"description": "Choose how you want the device displayed in HomeKit. Does not impact functionality.",
+				"type": "string",
+				"default": "form",
+				"oneOf": [{
+						"title": "Television",
+						"enum": ["TELEVISION"]
+					},
+					{
+						"title": "Streaming Stick",
+						"enum": ["TV_STREAMING_STICK"]
+					},
+					{
+						"title": "Set Top Box",
+						"enum": ["TV_SET_TOP_BOX"]
+					},
+					{
+						"title": "Apple TV",
+						"enum": ["APPLE_TV"]
+					}
+				]
+			}
+		}
+	}
+}
