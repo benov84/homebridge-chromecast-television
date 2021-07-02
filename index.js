@@ -1003,7 +1003,7 @@ module.exports = function (homebridge) {
   Characteristic = homebridge.hap.Characteristic; 
   Service = homebridge.hap.Service; 
   UUIDGen = homebridge.hap.uuid;
-  hap = homebridhe.hap;
+  hap = homebridge.hap;
 
   homebridge.registerPlatform('homebridge-chromecast-television', 'ChromecastTelevision', ControlChromecastPlatform, true);
   //homebridge.publishExternalAccessories('homebridge-chromecast-television', this.accessories);
