@@ -3,7 +3,7 @@
 
 This plugin will discover all chromecasts on the network and create a Television/Streaming Accessory. Supported are Chromecast/Chromecast Ultra.
 
-Switching On/Off will Play/Pause the stream. You can control the volume from Apple TV Remote in Control Center.
+Switching On/Off will stop the stream. You can control the volume and play/pause from Apple TV Remote in Control Center.
 
 ## Installation
 

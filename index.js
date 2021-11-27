@@ -222,7 +222,7 @@ ControlChromecastPlatform.prototype.configurationRequestHandler = function (cont
         services = [Service.LightSensor];
       }
 
-      characteristics = [Characteristic.Active, Characteristic.SleepDiscoveryMode, Characteristic.RemoteKey];
+      characteristics = [Characteristic.On, Characteristic.SleepDiscoveryMode, Characteristic.RemoteKey];
       
       for (var index in characteristics) {
         var characteristic = characteristics[index];
@@ -781,6 +781,27 @@ ChromecastAccessory.prototype.setCasting = function (on, callback) {
   callback();
 }
 
+ChromecastAccessory.prototype.stopCasting = function (on, callback) {
+  const currentlyCasting = this.isCastingStatus;
+  this.setIsCasting(false);
+
+  this.log(`Current status: ${currentlyCasting} - New status: ${false}`);
+
+  if (!this.castingMedia) {
+    callback();
+    return;
+  }
+
+  
+  this.log('stopCasting()');
+  try {
+    this.castingMedia.stop(() => null);
+  } catch(err) {
+    // console.log(err)
+  }
+
+  callback();
+}
 
 /**
  * Set the Chromecast volume
@@ -874,14 +895,12 @@ ChromecastAccessory.prototype.addEventHandler = function (service, characteristi
     return;
   }
 
-  let that = this;
-
   switch (characteristic) {
-    case Characteristic.Active:
+    case Characteristic.On:
       service
-        .getCharacteristic(Characteristic.Active)
+        .getCharacteristic(Characteristic.On)
         .on('get', this.isCasting.bind(this))
-        .on('set', this.setCasting.bind(this));
+        .on('set', this.stopCasting.bind(this));
       break;
     case Characteristic.SleepDiscoveryMode:
       service
@@ -932,18 +951,17 @@ ChromecastAccessory.prototype.addEventHandler = function (service, characteristi
             }
             case Characteristic.RemoteKey.BACK: {
               this.log.info('set Remote Key Pressed: BACK');
-              that.setCasting(false).bind(that);
+              this.setCasting(false).bind(this);
               break;
             }
             case Characteristic.RemoteKey.EXIT: {
               this.log.info('set Remote Key Pressed: EXIT');
-              that.setCasting(false).bind(that);
+              this.setCasting(false).bind(this);
               break;
             }
             case Characteristic.RemoteKey.PLAY_PAUSE: {
               this.log.info('set Remote Key Pressed: PLAY_PAUSE');
-              if (that.isCasting)
-                that.setCasting(!that.isCasting).bind(that);
+              this.setCasting(!this.isCastingStatus).bind(this);
               break;
             }
             case Characteristic.RemoteKey.INFORMATION: {
@@ -953,7 +971,7 @@ ChromecastAccessory.prototype.addEventHandler = function (service, characteristi
           }
 
           // don't forget to callback!
-          callback(null);
+          //callback(null);
         });
         break;
     case CustomCharacteristics.DeviceType:
@@ -975,8 +993,8 @@ ChromecastAccessory.prototype.addEventHandler = function (service, characteristi
 };
 
 ChromecastAccessory.prototype.addEventHandlers = function () {
-  this.addEventHandler(Service.Television, Characteristic.Active, 
-    Characteristic.SleepDiscoveryMode, Characteristic.RemoteKey);
+  this.addEventHandler(Service.Television, Characteristic.RemoteKey);
+  this.addEventHandler(Service.Television, Characteristic.On);
 
   this.accessoryInformationService = new Service.AccessoryInformation();
   this.accessoryInformationService
