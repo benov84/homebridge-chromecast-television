@@ -899,7 +899,7 @@ ChromecastAccessory.prototype.addEventHandler = function (service, characteristi
     case Characteristic.On:
       service
         .getCharacteristic(Characteristic.On)
-        .on('get', this.isCasting.bind(this))
+        .on('get', callback => callback(null, this.isCastingStatus))
         .on('set', this.stopCasting.bind(this));
       break;
     case Characteristic.SleepDiscoveryMode:
