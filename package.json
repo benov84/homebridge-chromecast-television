@@ -1,6 +1,6 @@
 {
   "name": "homebridge-chromecast-television",
-  "version": "2.0.3",
+  "version": "2.0.10",
   "description": "Expose Chromecast devices in Homebridge as Television accessory",
   "license": "ISC",
   "keywords": [
